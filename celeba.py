@@ -9,11 +9,12 @@ from torchvision import transforms
 import re
 import numpy as np
 import torch
+from random import randint
+
 
 CUR_DIR = os.path.dirname(os.path.abspath(__file__))
 
-
-## Create a custom Dataset class
+#Create a custom Dataset class
 class CelebADataset(Dataset):
     def __init__(
         self, root_dir=os.path.join(CUR_DIR, 'data/celeba'), 
@@ -85,3 +86,14 @@ class CelebADataset(Dataset):
         if self.transform:
             img = self.transform(img)
         return img, {'filename': img_name, 'idx': idx, 'attributes': torch.tensor(img_attributes).long()}
+
+
+class CelebaCustomDataset(CelebADataset):
+    def __getitem__(self, idx):
+        indices = [8, 9, 11, 15, 16, 20, 22, 28, 35, 39]
+        image, target = super().__getitem__(idx)
+        target = target['attributes'] == 1
+        new_target = target[indices].float()
+        if sum(new_target) == 0:
+            return self.__getitem__(randint(0, len(self)-1))
+        return image, new_target
