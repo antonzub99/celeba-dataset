@@ -43,7 +43,7 @@ class CelebADataset(Dataset):
                 download_url = 'https://drive.google.com/file/d/12agH1nWYcj7PAoErxQQgFdOAohgS9qE_/view?usp=sharing'
                 gdown.download(download_url, download_path, quiet=False, fuzzy=True)
             else:
-                download_url = 'https://drive.google.com/file/d/1E6pxJuESVcOTqQ4yn6cshIEnis5DvOPK/view'
+                download_url = 'https://drive.google.com/file/d/1LTBwGtaJRUssVdDYsRKwfuRN-2t_xjxs/view'
                 gdown.download(download_url, download_path, quiet=False, fuzzy=True)
             # Unzip the downloaded file 
             with zipfile.ZipFile(download_path, 'r') as ziphandler:
