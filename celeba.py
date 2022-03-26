@@ -90,6 +90,12 @@ class CelebADataset(Dataset):
 
 class CelebaCustomDataset(CelebADataset):
     def __getitem__(self, idx):
+        image, target = super().__getitem__(idx)
+        return image
+
+
+class CelebaCustomDatasetOld(CelebADataset):
+    def __getitem__(self, idx):
         indices = [8, 9, 11, 15, 16, 20, 22, 28, 35, 39]
         image, target = super().__getitem__(idx)
         target = target['attributes'] == 1
